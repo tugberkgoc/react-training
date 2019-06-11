@@ -6,19 +6,28 @@ class App extends React.Component {
     isShow: true,
   }
 
-  componentWillUpdate(nextProps, nextState, nextContext) {
-    console.log('componentWillUpdate')
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props) {
+    super(props)
+    // this.handleClick = this.handleClick.bind(this)
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    // console.log(`shouldComponentUpdate`)
-    console.log(nextProps, nextState, nextContext)
-
-    return true
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(`componentDidUpdate`)
+  /**
+   * If it is arrow function, then you do NOT need to bind these.
+   *
+   * OLD ONE :
+   * handleClick() {
+   *   this.setState({isShow: false})
+   * }
+   *
+   * Then,
+   *
+   * You should bind these
+   *
+   * this.handleClick = this.handleClick.bind(this)
+   */
+  handleClick = () => {
+    this.setState({isShow: false})
   }
 
   render() {
@@ -29,9 +38,7 @@ class App extends React.Component {
     return (
         <div>
           {isShow.toString()}
-          <button onClick={() => {
-            this.setState({isShow: !isShow})
-          }}>Toggle
+          <button onClick={this.handleClick}>Toggle
           </button>
         </div>
     )
